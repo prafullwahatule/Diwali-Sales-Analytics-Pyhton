@@ -1,0 +1,10 @@
+# Core libraries for data handling and numerical computation
+pandas
+numpy
+
+# Libraries for data visualization and plotting charts
+matplotlib
+seaborn
+
+# Jupyter Notebook for interactive data analysis
+jupyter
