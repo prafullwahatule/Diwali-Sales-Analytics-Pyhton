@@ -1,10 +1,222 @@
-# Core libraries for data handling and numerical computation
-pandas
-numpy
+CREATE TABLE categories (
+    CategoryID INT PRIMARY KEY AUTO_INCREMENT,
+    CategoryName VARCHAR(100),
+    DescriptionText VARCHAR(255)
+);
 
-# Libraries for data visualization and plotting charts
-matplotlib
-seaborn
+-- ===========================================================
+-- Insert initial category data  
+-- ===========================================================
 
-# Jupyter Notebook for interactive data analysis
-jupyter
+INSERT INTO categories (CategoryID, CategoryName, DescriptionText) VALUES
+(1, 'Beverages', 'Soft drinks, coffees, teas, beers, and ales'),       -- Beverages category
+(2, 'Condiments', 'Sweet and savory sauces, relishes, spreads, and seasonings'), -- Condiments category
+(3, 'Confections', 'Desserts, candies, and sweet breads'),             -- Confectionery items
+(4, 'Dairy Products', 'Cheeses'),                                      -- Dairy category
+(5, 'Grains/Cereals', 'Breads, crackers, pasta, and cereal'),          -- Grain and cereal products
+(6, 'Meat/Poultry', 'Prepared meats'),                                 -- Meat and poultry
+(7, 'Produce', 'Dried fruit and bean curd'),                           -- Fresh produce
+(8, 'Seafood', 'Seaweed and fish');                                    -- Seafood category             this full categories table of our schema                                                                                                                                                        
+
+
+
+
+
+CREATE TABLE customers (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerName VARCHAR(150),
+    ContactName VARCHAR(150),
+    Address VARCHAR(255),
+    City VARCHAR(100),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(100)
+);
+
+
+-- ===========================================================
+-- Insert initial customer data
+-- ===========================================================
+
+
+
+INSERT INTO customers (CustomerID, CustomerName, ContactName, Address, City, PostalCode, Country) VALUES
+(1, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany'),
+(2, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '5021', 'Mexico'),
+(3, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '5023', 'Mexico'),
+(4, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK'),
+(5, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden'),
+(6, 'Blauer See Delikatessen', 'Hanna Moos', 'Forsterstr. 57', 'Mannheim', '68306', 'Germany'),
+(7, 'Blondel père et fils', 'Frédérique Citeaux', '24 place Kléber', 'Strasbourg', '67000', 'France'),                    this our customer table and this have total 91 record                                                                                                                 
+
+
+
+
+CREATE TABLE employees (
+    EmployeeID INT PRIMARY KEY AUTO_INCREMENT,
+    LastName VARCHAR(100) NOT NULL,
+    FirstName VARCHAR(100) NOT NULL,
+    BirthDate DATE
+);
+
+-- ===========================================================
+-- INSERT EMPLOYEE DATA (1–10)
+-- ===========================================================
+
+INSERT INTO employees (EmployeeID, LastName, FirstName, BirthDate) VALUES
+(1, 'Davolio', 'Nancy', '1968-12-08'),
+(2, 'Fuller', 'Andrew', '1952-02-19'),
+(3, 'Leverling', 'Janet', '1963-08-30'),
+(4, 'Peacock', 'Margaret', '1958-09-19'),
+(5, 'Buchanan', 'Steven', '1955-03-04'),
+(6, 'Suyama', 'Michael', '1963-07-02'),
+(7, 'King', 'Robert', '1960-05-29'),
+(8, 'Callahan', 'Laura', '1958-01-09'),
+(9, 'Dodsworth', 'Anne', '1969-07-02'),
+(10, 'West', 'Adam', '1928-09-19');                   this our employees table and this have 10 record                                                                                           
+
+
+
+
+
+CREATE TABLE orders (
+    OrderID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerID INT NOT NULL,
+    EmployeeID INT NOT NULL,
+    OrderDate DATE NOT NULL,
+    ShipperID INT NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),
+    FOREIGN KEY (EmployeeID) REFERENCES employees(EmployeeID),
+    FOREIGN KEY (ShipperID) REFERENCES shippers(ShipperID)
+);
+
+-- ===========================================================
+-- INSERT ORDER DATA (OrderID: 10248 to 10400)
+-- ===========================================================
+
+INSERT INTO orders (OrderID, CustomerID, EmployeeID, OrderDate, ShipperID) VALUES
+(10248, 90, 5, '1996-07-04', 3),
+(10249, 81, 6, '1996-07-05', 1),
+(10250, 34, 4, '1996-07-08', 2),
+(10251, 84, 3, '1996-07-08', 1),
+(10252, 76, 4, '1996-07-09', 2),
+(10253, 34, 3, '1996-07-10', 2),
+(10254, 14, 5, '1996-07-11', 2),
+(10255, 68, 9, '1996-07-12', 3),
+(10256, 88, 3, '1996-07-15', 2),
+(10257, 35, 4, '1996-07-16', 3),
+(10258, 20, 1, '1996-07-17', 1),
+(10259, 13, 4, '1996-07-18', 3),
+(10260, 55, 4, '1996-07-19', 1),
+(10261, 61, 4, '1996-07-19', 2),
+(10262, 65, 8, '1996-07-22', 3),
+(10263, 20, 9, '1996-07-23', 3),
+(10264, 24, 6, '1996-07-24', 3),
+(10265, 7, 2, '1996-07-25', 1),
+(10266, 87, 3, '1996-07-26', 3),
+(10267, 25, 4, '1996-07-29', 1),
+(10268, 33, 8, '1996-07-30', 3),
+(10269, 89, 5, '1996-07-31', 1),
+(10270, 87, 1, '1996-08-01', 1),
+(10271, 75, 6, '1996-08-01', 2),
+(10272, 65, 6, '1996-08-02', 2),                this our orders table and this have total record id 10248 to  10400                                                                                                                                                                               
+
+
+
+
+
+CREATE TABLE shippers (
+    ShipperID INT PRIMARY KEY AUTO_INCREMENT,
+    ShipperName VARCHAR(100) NOT NULL,
+    Phone VARCHAR(50)
+);
+-- ===========================================================
+-- INSERT SHIPPER DATA (1–3)
+-- ===========================================================
+
+INSERT INTO shippers (ShipperID, ShipperName, Phone) VALUES
+(1, 'Speedy Express', '(503) 555-9831'),
+(2, 'United Package', '(503) 555-3199'),
+(3, 'Federal Shipping', '(503) 555-9931');            this our shippers table  and  this have onlye 3 records                                                                                              
+
+
+
+
+
+
+CREATE TABLE suppliers (
+    SupplierID INT PRIMARY KEY AUTO_INCREMENT,
+    SupplierName VARCHAR(150) NOT NULL,
+    ContactName VARCHAR(100),
+    Address VARCHAR(255),
+    City VARCHAR(100),
+    PostalCode VARCHAR(20),
+    Country VARCHAR(100),
+    Phone VARCHAR(50)
+);
+
+-- ===========================================================
+-- INSERT SUPPLIER DATA (1–29)
+-- ===========================================================
+
+INSERT INTO suppliers 
+(SupplierID, SupplierName, ContactName, Address, City, PostalCode, Country, Phone) VALUES
+(1,'Exotic Liquid','Charlotte Cooper','49 Gilbert St.','Londona','EC1 4SD','UK','(171) 555-2222'),
+(2,'New Orleans Cajun Delights','Shelley Burke','P.O. Box 78934','New Orleans','70117','USA','(100) 555-4822'),
+(3,'Grandma Kellys Homestead','Regina Murphy','707 Oxford Rd.','Ann Arbor','48104','USA','(313) 555-5735'),
+(4,'Tokyo Traders','Yoshi Nagase','9-8 Sekimai Musashino-shi','Tokyo','100','Japan','(03) 3555-5011'),
+(5,'Cooperativa de Quesos Las Cabras','Antonio del Valle Saavedra','Calle del Rosal 4','Oviedo','33007','Spain','(98) 598 76 54'),
+(6,'Mayumis','Mayumi Ohno','92 Setsuko Chuo-ku','Osaka','545','Japan','(06) 431-7877'),          this our suppliers table and this haveing supplier id 1 to 29                                                                                                                  
+
+
+
+
+CREATE TABLE order_details (
+    OrderDetailID INT PRIMARY KEY AUTO_INCREMENT,
+    OrderID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES products(ProductID)
+);
+
+-- ===========================================================
+-- INSERT ORDER_DETAILS DATA
+-- ===========================================================
+
+INSERT INTO order_details (OrderDetailID, OrderID, ProductID, Quantity) VALUES
+(1,10248,11,12),
+(2,10248,5,10),
+(3,10248,20,5),
+(4,10249,14,9),
+(5,10249,8,40),
+(6,10250,30,10),                  this our orderdetail table and this havi ids form 1 to 199    total recores are 199     
+
+
+CREATE TABLE products (
+    ProductID INT PRIMARY KEY AUTO_INCREMENT,
+    ProductName VARCHAR(100) NOT NULL,
+    SupplierID INT NOT NULL,
+    CategoryID INT NOT NULL,
+    QuantityPerUnit VARCHAR(50),
+    UnitPrice DECIMAL(10,2),
+    UnitsInStock INT,
+    UnitsOnOrder INT,
+    ReorderLevel INT,
+    Discontinued TINYINT DEFAULT 0,
+    FOREIGN KEY (CategoryID) REFERENCES categories(CategoryID),
+    FOREIGN KEY (SupplierID) REFERENCES suppliers(SupplierID)
+);
+
+-- ===========================================================
+-- INSERT PRODUCTS DATA
+-- ===========================================================
+INSERT INTO products 
+(ProductID, ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+VALUES
+(1, 'Chai', 1, 1, '10 boxes x 20 bags', 18.00, 39, 0, 10, 0),
+(2, 'Chang', 7, 1, '24 - 12 oz bottles', 19.00, 17, 40, 25, 0),
+(3, 'Aniseed Syrup', 12, 2, '12 - 550 ml bottles', 10.00, 13, 70, 25, 0),
+(4, 'Chef Anton''s Cajun Seasoning', 4, 2, '48 - 6 oz jars', 22.00, 53, 0, 0, 0),
+(5, 'Chef Anton''s Gumbo Mix', 17, 2, '36 boxes', 21.35, 0, 0, 0, 1),
+
+and this all abour our scheema remmeber this and give senario based qutions when i give you topic
