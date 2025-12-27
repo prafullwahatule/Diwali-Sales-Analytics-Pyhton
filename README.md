@@ -166,3 +166,22 @@ The dataset contains the following columns:
 - All analysis done in **Python** using **Pandas, Seaborn, and Matplotlib**.
 - Assumes **historical Diwali sales data** without explicit dates.
 - Forecasting is **assumption-based**, not time-series due to missing date data.
+
+
+---
+## 🙏 Acknowledgement  
+
+Special thanks to the **Diwali Sales Sharing Dataset (Open Data)** for providing an excellent real-world dataset.  
+This project was created as part of a **Data Analytics learning journey** using **Pandas, Numpy, Seaborn, and Matplotlib**.  
+
+---
+
+## 📎 Author  
+
+**👤 Name:** Prafull Wahatule  
+**📧 Email:** [prafullwahatule@gmail.com](mailto:prafullwahatule@gmail.com)  
+**💻 GitHub:** [prafullwahatule](https://github.com/prafullwahatule)  
+
+---
+
+⭐ *If you found this project helpful, don’t forget to star the repository!* ⭐
